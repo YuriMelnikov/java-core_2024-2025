@@ -1,5 +1,6 @@
 package com.melnikov.MySecondTestAppSpringBoot.controller;
 
+import com.melnikov.MySecondTestAppSpringBoot.exception.UnsupportedCodeException;
 import com.melnikov.MySecondTestAppSpringBoot.exception.ValidationFailedException;
 import com.melnikov.MySecondTestAppSpringBoot.model.Request;
 import com.melnikov.MySecondTestAppSpringBoot.model.Response;
@@ -39,7 +40,16 @@ public class MyController {
                 .errorMessage("")
                 .build();
         try {
+            if(request.getUid().equals("123")){
+                throw new UnsupportedCodeException("Uid = 123 не поддерживается");
+            }
+
             validationService.isValid(bindingResult);
+        } catch (UnsupportedCodeException e){
+            response.setCode("failed");
+            response.setErrorCode("UnsupportedCodeException");
+            response.setErrorMessage("Не поддерживаемая ошибка");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (ValidationFailedException e){
             response.setCode("failed");
             response.setErrorCode("ValidationException");
