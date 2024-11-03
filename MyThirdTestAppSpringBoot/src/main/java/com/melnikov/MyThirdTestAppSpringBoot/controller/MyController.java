@@ -1,10 +1,12 @@
-package com.melnikov.MySecondTestAppSpringBoot.controller;
+package com.melnikov.MyThirdTestAppSpringBoot.controller;
 
-import com.melnikov.MySecondTestAppSpringBoot.exception.UnsupportedCodeException;
-import com.melnikov.MySecondTestAppSpringBoot.exception.ValidationFailedException;
-import com.melnikov.MySecondTestAppSpringBoot.model.*;
-import com.melnikov.MySecondTestAppSpringBoot.service.*;
-import com.melnikov.MySecondTestAppSpringBoot.util.DateTimeUtil;
+import com.melnikov.MyThirdTestAppSpringBoot.exception.UnsupportedCodeException;
+import com.melnikov.MyThirdTestAppSpringBoot.exception.ValidationFailedException;
+import com.melnikov.MyThirdTestAppSpringBoot.model.*;
+import com.melnikov.MyThirdTestAppSpringBoot.service.ModifyRequestService;
+import com.melnikov.MyThirdTestAppSpringBoot.service.ModifyResponseService;
+import com.melnikov.MyThirdTestAppSpringBoot.service.ValidationService;
+import com.melnikov.MyThirdTestAppSpringBoot.util.DateTimeUtil;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Instant;
 import java.util.Date;
 
 @Slf4j
@@ -25,17 +26,14 @@ public class MyController {
     private final ValidationService validationService;
     private final ModifyResponseService modifyResponseService;
     private final ModifyRequestService modifyRequestService;
-    private final ModifyRequestServiceSource modifyRequestServiceSource;
 
     @Autowired
     public MyController(ValidationService validationService,
-                        @Qualifier("ModifySystemTimeResponseService") ModifyResponseService modifyResponseService,
-                        @Qualifier("ModifyRequestServiceSource") ModifyRequestService modifyRequestService,
-                        @Qualifier("ModifyRequestServiceSource") ModifyRequestServiceSource modifyRequestServiceSource){
+                        @Qualifier("ModifyOperationUidResponseService") ModifyResponseService modifyResponseService,
+                        @Qualifier("ModifyRequestServiceSystemTime") ModifyRequestService modifyRequestService) {
         this.validationService = validationService;
         this.modifyResponseService = modifyResponseService;
         this.modifyRequestService = modifyRequestService;
-        this.modifyRequestServiceSource = modifyRequestServiceSource;
     }
 
     @PostMapping(value = "/feedback")
@@ -43,9 +41,6 @@ public class MyController {
                                              BindingResult bindingResult){
 
         log.info("Received request: {}", request);
-        log.info("Received request: {}", request);
-        // Устанавливаем текущее время в объект запроса
-        request.setReceivedTime(Instant.now());
 
         Response response = Response.builder()
                 .uid(request.getUid())
@@ -59,6 +54,11 @@ public class MyController {
         log.info("Initial response created: {}", response);
 
         try {
+            if (bindingResult.hasErrors()) {
+                log.error("BindingResult has errors: {}", bindingResult.getAllErrors());
+                throw new ValidationFailedException("Validation failed", "ValidationFailedException");
+            }
+
             if(request.getUid().equals("123")){
                 log.info("Unsupported UID detected: {}", request.getUid());
                 throw new UnsupportedCodeException("Uid = 123 не поддерживается");
@@ -90,10 +90,11 @@ public class MyController {
             log.info("Response modified after unexpected error: {}", response);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        modifyRequestServiceSource.modify(request);
-        modifyResponseService.modify(response);
         modifyRequestService.modify(request);
-        log.info("Final response: {}", response);
-        return new ResponseEntity<>(modifyResponseService.modify(response), HttpStatus.OK);
+        //log.info("Final response: {}", response);
+        //log.info("Final request: {}", request);
+        //modifyResponseService.modify(response);
+        //modifyRequestService.modify(request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

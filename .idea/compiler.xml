@@ -9,13 +9,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MyFirstTestAppSpringBoot" />
         <module name="MySecondTestAppSpringBoot" />
+        <module name="MyThirdTestAppSpringBoot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="1" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="1" options="-parameters" />
       <module name="MyFirstTestAppSpringBoot" options="-parameters" />
       <module name="MySecondTestAppSpringBoot" options="-parameters" />
+      <module name="MyThirdTestAppSpringBoot" options="-parameters" />
     </option>
   </component>
 </project>

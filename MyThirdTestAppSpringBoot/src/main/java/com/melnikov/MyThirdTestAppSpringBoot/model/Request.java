@@ -1,4 +1,4 @@
-package com.melnikov.MySecondTestAppSpringBoot.model;
+package com.melnikov.MyThirdTestAppSpringBoot.model;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -51,7 +51,7 @@ public class Request {
                 ", templateId='" + templateId + '\'' +
                 ", productCode='" + productCode + '\'' +
                 ", smsCode='" + smsCode + '\'' +
-                ", receivedTime='" + receivedTime + '\'' +
+                ", receivedTime='" + receivedTime + '\'' + // Добавлено для отладки
                 '}';
     }
 }
