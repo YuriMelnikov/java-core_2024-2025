@@ -1,13 +1,11 @@
 package com.melnikov.MySecondTestAppSpringBoot.model;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.Instant;
 
@@ -17,41 +15,97 @@ import java.time.Instant;
 @AllArgsConstructor
 public class Request {
 
-    @NotBlank
-    @Size(max = 32, message = "Длина не может превышать 32 символа")
+    /**
+     * Уникальный идентификатор сообщения
+     */
+    @NotBlank(message = "UID не может быть пустым")
+    @Length(max = 32)
+    @Pattern(regexp = "^(?!123$).*")
     private String uid;
 
+    /**
+     * Уникальный идентификатор операции
+     */
     @NotBlank
-    @Size(max = 32, message = "Длина не может превышать 32 символа")
+    @Length(max = 32)
     private String operationUid;
 
+    /**
+     * Имя системы отправителя
+     */
     private Systems systemName;
 
+    /**
+     * Время создания сообщения
+     */
+    @NotBlank
     private String systemTime;
+
+    /**
+     * Наименование ресурса
+     */
     private String source;
 
-    @Min(value = 1, message = "Минимальное значение — 1")
-    @Max(value = 100000, message = "Максимальное значение — 100000")
+    /**
+     * Должность сотрудника
+     */
+    private Positions position;
+
+    /**
+     * Зарплата сотрудника
+     */
+    private Double salary;
+
+    /**
+     * Бонусный коэффициент
+     */
+    private Double bonus;
+
+    /**
+     * Количество отработанных дней
+     */
+    private Integer workDays;
+
+    /**
+     * Уникальный идентификатор коммуникации
+     */
+    @Min(1)
+    @Max(100000)
     private int communicationId;
 
+    /**
+     * Уникальный идентификатор шаблона
+     */
     private int templateId;
+
+    /**
+     * Код продукта
+     */
     private int productCode;
+
+    /**
+     * Смс код
+     */
     private int smsCode;
     private Instant receivedTime;
 
     @Override
-    public String toString(){
-        return "{"+
+    public String toString() {
+        return "Request{" +
                 "uid='" + uid + '\'' +
                 ", operationUid='" + operationUid + '\'' +
-                ", systemName='" + systemName + '\'' +
+                ", systemName=" + systemName +
                 ", systemTime='" + systemTime + '\'' +
                 ", source='" + source + '\'' +
-                ", communicationId='" + communicationId + '\'' +
-                ", templateId='" + templateId + '\'' +
-                ", productCode='" + productCode + '\'' +
-                ", smsCode='" + smsCode + '\'' +
-                ", receivedTime='" + receivedTime + '\'' +
+                ", position=" + position +
+                ", salary=" + salary +
+                ", bonus=" + bonus +
+                ", workDays=" + workDays +
+                ", communicationId=" + communicationId +
+                ", templateId=" + templateId +
+                ", productCode=" + productCode +
+                ", smsCode=" + smsCode +
                 '}';
     }
+
 }

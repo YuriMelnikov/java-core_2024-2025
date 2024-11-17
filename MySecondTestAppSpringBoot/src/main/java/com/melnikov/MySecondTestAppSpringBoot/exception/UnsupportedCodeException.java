@@ -1,5 +1,14 @@
 package com.melnikov.MySecondTestAppSpringBoot.exception;
 
-public class UnsupportedCodeException extends Exception {
-    public UnsupportedCodeException(String message) {super(message);}
+public class UnsupportedCodeException extends RuntimeException {
+    private final String errorCode;
+
+    public UnsupportedCodeException(String message, String errorCode) {
+        super(message);
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
 }

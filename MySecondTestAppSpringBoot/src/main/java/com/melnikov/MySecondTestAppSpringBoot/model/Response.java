@@ -6,11 +6,51 @@ import lombok.Data;
 @Data
 @Builder
 public class Response {
-    private String uid;
-    private String operationUid;
-    private String systemTime;
-    private Codes code;
-    private ErrorCodes errorCode;
-    private ErrorMessages errorMessage;
 
+    /**
+     * Уникальный идентификатор сообщения.
+     * Обязательный параметр.
+     */
+    private String id;
+
+    /**
+     * Уникальный идентификатор операции.
+     * Обязательный параметр.
+     */
+    private String operationUid;
+
+    /**
+     * Имя системы отправителя.
+     * Обязательный параметр, всегда "ERP".
+     */
+    private String systemTime;
+
+    /**
+     * Годовая премия
+     */
+    private Double annualBonus;
+
+    /**
+     * Квартальная премия
+     */
+    private Double quarterlyBonus;
+
+    /**
+     * Код статуса обработки.
+     * Возможные значения: "success", "failed".
+     */
+
+    private Codes code;
+
+    /**
+     * Код ошибки, если обработка завершилась неуспешно.
+     * Возможные значения: "UnsupportedCodeException", "ValidationException", "UnknownException".
+     */
+    private ErrorCodes errorCode;
+
+    /**
+     * Сообщение об ошибке, если обработка завершилась неуспешно.
+     * Возможные значения: "Не поддерживаемая ошибка", "Ошибка валидации", "Произошла непредвиденная ошибка".
+     */
+    private ErrorMessages errorMessage;
 }
