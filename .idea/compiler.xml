@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MySpringBoot2Base" />
         <module name="MyFirstTestAppSpringBoot" />
         <module name="MySecondTestAppSpringBoot" />
         <module name="MyThirdTestAppSpringBoot" />
@@ -21,6 +22,7 @@
       <module name="1" options="-parameters" />
       <module name="MyFirstTestAppSpringBoot" options="-parameters" />
       <module name="MySecondTestAppSpringBoot" options="-parameters" />
+      <module name="MySpringBoot2Base" options="-parameters" />
       <module name="MyThirdTestAppSpringBoot" options="-parameters" />
     </option>
   </component>
