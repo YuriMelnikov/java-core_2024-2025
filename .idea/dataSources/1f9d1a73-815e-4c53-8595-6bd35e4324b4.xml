@@ -169,11 +169,14 @@
     <schema id="162" parent="2" name="INFORMATION_SCHEMA"/>
     <schema id="163" parent="2" name="PUBLIC">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-11-30.19:31:06</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-29.10:22:20</LastIntrospectionLocalTimestamp>
     </schema>
     <table id="164" parent="163" name="DISCIPLINES"/>
-    <table id="165" parent="163" name="STUDENTS"/>
-    <column id="166" parent="164" name="ID">
+    <table id="165" parent="163" name="ROLES"/>
+    <table id="166" parent="163" name="STUDENTS"/>
+    <table id="167" parent="163" name="USERS"/>
+    <table id="168" parent="163" name="USERS_ROLES"/>
+    <column id="169" parent="164" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -183,59 +186,167 @@
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>INTEGER|0s</SequenceStoredType>
     </column>
-    <column id="167" parent="164" name="NAME">
+    <column id="170" parent="164" name="NAME">
       <Position>2</Position>
-      <StoredType>CHARACTER VARYING(15)|0s</StoredType>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="168" parent="164" name="HOURS">
+    <column id="171" parent="164" name="HOURS">
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <index id="169" parent="164" name="PRIMARY_KEY_1">
+    <index id="172" parent="164" name="PRIMARY_KEY_1">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="170" parent="164" name="CONSTRAINT_1">
+    <key id="173" parent="164" name="CONSTRAINT_1">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="171" parent="165" name="ID">
+    <column id="174" parent="165" name="ID">
+      <ColumnKind>generated-stored</ColumnKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>BIGINT|0s</StoredType>
+      <SequenceInline>1</SequenceInline>
+      <SequenceSequenceIdentity>1(2)</SequenceSequenceIdentity>
+      <SequenceStartValue>1</SequenceStartValue>
+      <SequenceStoredType>BIGINT|0s</SequenceStoredType>
+    </column>
+    <column id="175" parent="165" name="NAME">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
+    </column>
+    <index id="176" parent="165" name="PRIMARY_KEY_4">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="177" parent="165" name="UKOFX66KERUAPI6VYQPV6F2OR37_INDEX_4">
+      <ColNames>NAME</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="178" parent="165" name="CONSTRAINT_4">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <key id="179" parent="165" name="UKOFX66KERUAPI6VYQPV6F2OR37">
+      <ColNames>NAME</ColNames>
+    </key>
+    <column id="180" parent="166" name="ID">
       <ColumnKind>generated-stored</ColumnKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
       <SequenceInline>1</SequenceInline>
-      <SequenceSequenceIdentity>1(5)</SequenceSequenceIdentity>
+      <SequenceSequenceIdentity>1(7)</SequenceSequenceIdentity>
       <SequenceStartValue>1</SequenceStartValue>
       <SequenceStoredType>INTEGER|0s</SequenceStoredType>
     </column>
-    <column id="172" parent="165" name="NAME">
+    <column id="181" parent="166" name="NAME">
       <Position>2</Position>
-      <StoredType>CHARACTER VARYING(15)|0s</StoredType>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="173" parent="165" name="SURNAME">
+    <column id="182" parent="166" name="SURNAME">
       <Position>3</Position>
-      <StoredType>CHARACTER VARYING(25)|0s</StoredType>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="174" parent="165" name="FACULTY">
+    <column id="183" parent="166" name="FACULTY">
       <Position>4</Position>
-      <StoredType>CHARACTER VARYING(20)|0s</StoredType>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
     </column>
-    <column id="175" parent="165" name="AGE">
+    <column id="184" parent="166" name="AGE">
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <index id="176" parent="165" name="PRIMARY_KEY_9">
+    <index id="185" parent="166" name="PRIMARY_KEY_9">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Unique>1</Unique>
     </index>
-    <key id="177" parent="165" name="CONSTRAINT_9">
+    <key id="186" parent="166" name="CONSTRAINT_9">
       <ColNames>ID</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
+    <column id="187" parent="167" name="ID">
+      <ColumnKind>generated-stored</ColumnKind>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>BIGINT|0s</StoredType>
+      <SequenceInline>1</SequenceInline>
+      <SequenceSequenceIdentity>1(2)</SequenceSequenceIdentity>
+      <SequenceStartValue>1</SequenceStartValue>
+      <SequenceStoredType>BIGINT|0s</SequenceStoredType>
+    </column>
+    <column id="188" parent="167" name="EMAIL">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
+    </column>
+    <column id="189" parent="167" name="NAME">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
+    </column>
+    <column id="190" parent="167" name="PASSWORD">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StoredType>CHARACTER VARYING(255)|0s</StoredType>
+    </column>
+    <index id="191" parent="167" name="PRIMARY_KEY_4D">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="192" parent="167" name="UK6DOTKOTT2KJSP8VW4D0M25FB7_INDEX_4">
+      <ColNames>EMAIL</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="193" parent="167" name="CONSTRAINT_4D">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
+    <key id="194" parent="167" name="UK6DOTKOTT2KJSP8VW4D0M25FB7">
+      <ColNames>EMAIL</ColNames>
+    </key>
+    <column id="195" parent="168" name="USER_ID">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>BIGINT|0s</StoredType>
+    </column>
+    <column id="196" parent="168" name="ROLE_ID">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>BIGINT|0s</StoredType>
+    </column>
+    <foreign-key id="197" parent="168" name="FK2O0JVGH89LEMVVO17CBQVDXAA">
+      <ColNames>USER_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_4D</RefKeyName>
+      <RefTableName>USERS</RefTableName>
+    </foreign-key>
+    <foreign-key id="198" parent="168" name="FKJ6M8FWV7OQV74FCEHIR1A9FFY">
+      <ColNames>ROLE_ID</ColNames>
+      <OnDelete>restrict</OnDelete>
+      <OnUpdate>restrict</OnUpdate>
+      <RefKeyName>CONSTRAINT_4</RefKeyName>
+      <RefTableName>ROLES</RefTableName>
+    </foreign-key>
+    <index id="199" parent="168" name="FK2O0JVGH89LEMVVO17CBQVDXAA_INDEX_A">
+      <ColNames>USER_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
+    <index id="200" parent="168" name="FKJ6M8FWV7OQV74FCEHIR1A9FFY_INDEX_A">
+      <ColNames>ROLE_ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+    </index>
   </database-model>
 </dataSource>
